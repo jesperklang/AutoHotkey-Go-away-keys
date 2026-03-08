@@ -1,23 +1,25 @@
-#Persistent
+#Requires AutoHotkey v2.0
+#SingleInstance Force
 
-; Disable caps lock
-SetCapsLockState, AlwaysOff
+; Disables Caps lock
+SetCapsLockState "AlwaysOff"
 
-; Disable Insert
-$Insert::return
+; Disables the Insert key
+$Insert::Return
 
-; Disable Copilot key (Left Windows + Left Shift + F23)
+; Disables the Copilot key
 <+<#F23::Return
 
-; If you are confused, Toggle Caps lock with Win + Caps lock
+; Toggle Caps lock with Win + Caps lock
 #CapsLock::
-if GetKeyState("CapsLock", "T") = 1 {
-    SetCapsLockState, AlwaysOff
-    return
-} else {
-    SetCapsLockState, AlwaysOn
-    return
+{
+    if GetKeyState("CapsLock", "T") {
+        SetCapsLockState "AlwaysOff"
+        return
+    }
+
+    SetCapsLockState "AlwaysOn"
 }
 
 ; Toggle Insert with Win + Insert
-#Insert::Send {Insert}
+#Insert::Send "{Insert}"
